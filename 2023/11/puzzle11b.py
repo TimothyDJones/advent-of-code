@@ -41,12 +41,8 @@ def get_galaxy_coordinates(grid, expanded_rows, expanded_cols):
             # print(col, row, grid[row][col])
             if grid[row][col] == "#":
                 new_col, new_row = col, row
-                for r in expanded_rows:
-                    if r < row:
-                        new_row += EXPANSION_CONSTANT - 1
-                for c in expanded_cols:
-                    if c < col:
-                        new_col += EXPANSION_CONSTANT - 1
+                new_row += len([r for r in expanded_rows if r < row]) * (EXPANSION_CONSTANT - 1)
+                new_col += len([c for c in expanded_cols if c < col]) * (EXPANSION_CONSTANT - 1)
                 galaxy_coord.append([new_col, new_row])
     print(galaxy_coord)    
     return (galaxy_coord)
